@@ -18,8 +18,7 @@ import { AccordionMenu } from "./UI/AccordionMenu";
 import AirTraffic from "./Map/AirTraffic";
 import PredictionIsochrone from "./Map/PredictionIsochrone";
 
-const API_KEY =
-  "pk.eyJ1IjoibWFkb2xlIiwiYSI6ImNrNG5lZXZiaDBybDkzbHF5MXdoZGFwNmIifQ.-naGsMeAUZqR2Q9WM1EYLw";
+const API_KEY = import.meta.env.VITE_MAPBOX_KEY as string;
 
 function App() {
   return (
