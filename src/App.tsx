@@ -17,6 +17,7 @@ import ShowMyLocation from "./Map/ShowMyLocation";
 import { AccordionMenu } from "./UI/AccordionMenu";
 import AirTraffic from "./Map/AirTraffic";
 import PredictionIsochrone from "./Map/PredictionIsochrone";
+import Buildings from "./Map/Buildings";
 
 const API_KEY = import.meta.env.VITE_MAPBOX_KEY as string;
 
@@ -39,6 +40,7 @@ function App() {
           <MapStyle />
           <Sky />
           <Dem />
+          <Buildings />
           <ShowMyLocation />
           <MapControls />
           <DrawingControls />

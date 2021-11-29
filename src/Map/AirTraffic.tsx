@@ -48,7 +48,6 @@ const AirTrafficComponent: React.VFC = () => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       const coordinates = e.features[0].geometry.coordinates.slice();
-      console.log(e.features[0].properties);
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       const description = `<table>${Object.entries(e.features[0].properties)

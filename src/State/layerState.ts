@@ -19,3 +19,8 @@ export const airTrafficState = atom<boolean>({
   key: "airTraffic",
   default: false,
 });
+
+export const buildingState = atom<boolean>({
+  key: "building",
+  default: true,
+});

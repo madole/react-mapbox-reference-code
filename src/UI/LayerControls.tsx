@@ -15,6 +15,7 @@ import {
   isochronePredictionState,
   threeDIsochronePredictionState,
   airTrafficState,
+  buildingState,
 } from "../State/layerState";
 
 const defaultFireZone = "abc123";
@@ -31,6 +32,8 @@ const LayerControls: React.VFC = () => {
   );
 
   const [showAirTraffic, setShowAirTraffic] = useRecoilState(airTrafficState);
+  const [showBuildings, setShowBuildings] = useRecoilState(buildingState);
+
   return (
     <>
       <Stack alignItems={"center"}>
@@ -109,6 +112,20 @@ const LayerControls: React.VFC = () => {
             />
           }
           label={"Show Air Traffic"}
+        />
+      </Stack>
+      <Divider />
+      <Stack alignItems={"start"}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={showBuildings}
+              onChange={(event, newValue) => {
+                setShowBuildings(newValue);
+              }}
+            />
+          }
+          label={"Show Buildings"}
         />
       </Stack>
     </>

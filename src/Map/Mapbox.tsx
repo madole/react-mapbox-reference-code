@@ -43,7 +43,14 @@ const Mapbox: React.FC<MapboxProps> = (props) => {
       zoom: zoom,
     }).on("load", () => {
       setLoaded(true);
+      mapboxRef.current?.addSource("composite", {
+        url: "mapbox://mapbox.mapbox-streets-v8",
+        type: "vector",
+      });
     });
+    return () => {
+      mapboxRef.current?.removeSource("composite");
+    };
   }, [center, style, zoom]);
 
   return (
