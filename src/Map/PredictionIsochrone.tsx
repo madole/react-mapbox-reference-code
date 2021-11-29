@@ -8,10 +8,14 @@ import {
   isochronePredictionState,
   threeDIsochronePredictionState,
 } from "../State/layerState";
+import { Polygon } from "@turf/helpers";
 
-const splitPredictions = maskFeatureCollectionPolygons(prediction as any);
+const splitPredictions = maskFeatureCollectionPolygons(
+  prediction as GeoJSON.FeatureCollection<Polygon>
+);
 const PREFIX = "isochrone";
-const popups: mapboxgl.Popup[] = [];
+let popups: mapboxgl.Popup[] = [];
+
 const PredictionIsochroneComponent: React.VFC = () => {
   const map = useMapboxMap();
   const threeDPrediction = useRecoilValue(threeDIsochronePredictionState);
@@ -91,15 +95,15 @@ const PredictionIsochroneComponent: React.VFC = () => {
 
       const popup = new mapboxgl.Popup()
         .setLngLat(
-          Array.isArray(feature.geometry.coordinates[0][0][0])
+          (Array.isArray(feature.geometry.coordinates[0][0][0])
             ? feature.geometry.coordinates[0][0][0]
-            : feature.geometry.coordinates[0][0]
+            : feature.geometry.coordinates[0][0]) as mapboxgl.LngLatLike
         )
         .setHTML(
           `
-          <h3>Type: ${feature.properties.type}</h3>
-          <p>Time: ${feature.properties.time}</p>
-          <p>Diff from now: ${feature.properties.diff}</p>
+          <h3>Type: ${feature.properties?.type}</h3>
+          <p>Time: ${feature.properties?.time}</p>
+          <p>Diff from now: ${feature.properties?.diff}</p>
 
       `
         )
@@ -121,8 +125,9 @@ const PredictionIsochroneComponent: React.VFC = () => {
       popups.forEach((popup) => {
         popup.remove();
       });
+      popups = [];
     };
-  }, [map, popups, threeDPrediction]);
+  }, [map, threeDPrediction]);
   return null;
 };
 
