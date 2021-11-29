@@ -57,7 +57,8 @@ const PredictionIsochroneComponent: React.VFC = () => {
               "#bb342f",
             ],
             "fill-extrusion-opacity": 0.85,
-            "fill-extrusion-height": ["get", "height"],
+            // "fill-extrusion-height": ["get", "height"],
+            "fill-extrusion-height": ["/", 1000, ["get", "id"]],
           },
         });
       } else {

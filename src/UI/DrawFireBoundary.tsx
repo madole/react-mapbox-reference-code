@@ -1,7 +1,7 @@
 import { Fab } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import React from "react";
-import { drawControl } from "../Map/DrawingControls";
+import { drawControl } from "../Map/drawControlSetup";
 
 export function DrawFireBoundary() {
   return (

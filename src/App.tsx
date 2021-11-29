@@ -18,6 +18,7 @@ import { AccordionMenu } from "./UI/AccordionMenu";
 import AirTraffic from "./Map/AirTraffic";
 import PredictionIsochrone from "./Map/PredictionIsochrone";
 import Buildings from "./Map/Buildings";
+import HandDrawnIsochrone from "./Map/HandDrawnIsochrone";
 
 const API_KEY = import.meta.env.VITE_MAPBOX_KEY as string;
 
@@ -43,7 +44,8 @@ function App() {
           <Buildings />
           <ShowMyLocation />
           <MapControls />
-          <DrawingControls />
+          {/*<DrawingControls />*/}
+          <HandDrawnIsochrone />
           <Video />
           <DroneVisualisation />
           <Firezone />

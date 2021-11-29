@@ -24,3 +24,8 @@ export const buildingState = atom<boolean>({
   key: "building",
   default: true,
 });
+
+export const handDrawnIsochroneState = atom<boolean>({
+  key: "showHandDrawnIsochrone",
+  default: false,
+});
