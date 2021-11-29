@@ -1,6 +1,7 @@
 import { Fab } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import React from "react";
+import { drawControl } from "../Map/DrawingControls";
 
 export function DrawFireBoundary() {
   return (
@@ -13,6 +14,9 @@ export function DrawFireBoundary() {
         position: "fixed",
         bottom: "2rem",
         right: "3rem",
+      }}
+      onClick={() => {
+        drawControl.changeMode("draw_polygon");
       }}
     >
       <Add sx={{ mr: 1 }} />

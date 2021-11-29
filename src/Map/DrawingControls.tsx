@@ -11,7 +11,7 @@ FreehandMode.simplify = function () {
   /* noop */
 };
 
-const drawControl = new MapboxDraw({
+export const drawControl = new MapboxDraw({
   displayControlsDefault: false,
   controls: {
     line_string: true,

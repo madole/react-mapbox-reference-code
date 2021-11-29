@@ -12,7 +12,7 @@ export const videoOpacityState = atom<number>({
 
 export const videoDisplayState = atom<boolean>({
   key: "videoDisplayState",
-  default: true,
+  default: false,
 });
 
 export const droneDisplayState = atom<boolean>({

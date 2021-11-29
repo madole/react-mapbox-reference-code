@@ -10,12 +10,11 @@ import {
 } from "../State/layerState";
 
 const splitPredictions = maskFeatureCollectionPolygons(prediction as any);
-const PREFIX = "isochrone-";
-
+const PREFIX = "isochrone";
+const popups: mapboxgl.Popup[] = [];
 const PredictionIsochroneComponent: React.VFC = () => {
   const map = useMapboxMap();
   const threeDPrediction = useRecoilValue(threeDIsochronePredictionState);
-  const popups: mapboxgl.Popup[] = [];
 
   useEffect(() => {
     splitPredictions.features.forEach((feature, i) => {
@@ -109,15 +108,21 @@ const PredictionIsochroneComponent: React.VFC = () => {
     });
     return () => {
       splitPredictions.features.forEach((_, i) => {
-        map.removeLayer(`${PREFIX}-${i}-extrusion`);
-        map.removeLayer(`${PREFIX}-${i}-fill`);
-        map.removeSource(`${PREFIX}-${i}-source`);
+        if (map.getLayer(`${PREFIX}-${i}-extrusion`)) {
+          map.removeLayer(`${PREFIX}-${i}-extrusion`);
+        }
+        if (map.getLayer(`${PREFIX}-${i}-fill`)) {
+          map.removeLayer(`${PREFIX}-${i}-fill`);
+        }
+        if (map.getSource(`${PREFIX}-${i}-source`)) {
+          map.removeSource(`${PREFIX}-${i}-source`);
+        }
       });
       popups.forEach((popup) => {
         popup.remove();
       });
     };
-  }, [map, threeDPrediction]);
+  }, [map, popups, threeDPrediction]);
   return null;
 };
 
