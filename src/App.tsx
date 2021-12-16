@@ -20,6 +20,7 @@ import PredictionIsochrone from "./Map/PredictionIsochrone";
 import Buildings from "./Map/Buildings";
 import HandDrawnIsochrone from "./Map/HandDrawnIsochrone";
 import HandDrawnExtrudedIsochrone from "./Map/HandDrawnExtrudedIsochrone";
+import VideoMarker from "./Map/VideoMarker";
 
 const API_KEY = import.meta.env.VITE_MAPBOX_KEY as string;
 
@@ -53,6 +54,7 @@ function App() {
           <Firezone />
           <AirTraffic />
           <PredictionIsochrone />
+          <VideoMarker />
         </Mapbox>
         <DrawFireBoundary />
       </Box>

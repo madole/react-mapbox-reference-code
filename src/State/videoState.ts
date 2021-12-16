@@ -1,4 +1,6 @@
 import { atom } from "recoil";
+import { Simulate } from "react-dom/test-utils";
+import play = Simulate.play;
 
 export const videoTypeState = atom<"thermal" | "visual" | "mixed">({
   key: "videoTypeState",
@@ -23,4 +25,14 @@ export const droneDisplayState = atom<boolean>({
 export const videoPlayState = atom<"play" | "pause">({
   key: "videoPlayState",
   default: "play",
+});
+
+export const videoTiming = atom<number>({
+  key: "videoTiming",
+  default: 0,
+});
+
+export const showVideoMarkerState = atom<boolean>({
+  key: "videoMarker",
+  default: false,
 });

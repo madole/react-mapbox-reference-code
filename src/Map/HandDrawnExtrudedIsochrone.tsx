@@ -30,9 +30,16 @@ const HandDrawnExtrudedIsochroneLayer: React.VFC = () => {
         return [...existingGeojson, newFeature];
       });
       setTimeout(() => {
+        const id = drawControl.getAll()?.features[0]?.id;
+        if (id) {
+          drawControl.delete(id.toString());
+        }
         drawControl.changeMode("draw_polygon");
       }, 200);
     });
+    return () => {
+      drawControl.changeMode(null);
+    };
   }, [map]);
 
   useEffect(() => {
@@ -83,7 +90,7 @@ const HandDrawnExtrudedIsochroneLayer: React.VFC = () => {
           ],
           "fill-extrusion-opacity": 0.85,
           // "fill-extrusion-height": ["get", "height"],
-          "fill-extrusion-height": ["/", 500, ["get", "id"]],
+          "fill-extrusion-height": ["/", 300, ["get", "id"]],
         },
       });
     });

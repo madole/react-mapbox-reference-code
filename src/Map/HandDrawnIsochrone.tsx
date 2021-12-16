@@ -30,9 +30,16 @@ const HandDrawnIsochroneComponent: React.VFC = () => {
         return [...existingGeojson, newFeature];
       });
       setTimeout(() => {
+        const id = drawControl.getAll()?.features[0]?.id;
+        if (id) {
+          drawControl.delete(id.toString());
+        }
         drawControl.changeMode("draw_polygon");
       }, 200);
     });
+    return () => {
+      drawControl.changeMode(null);
+    };
   }, [map]);
 
   useEffect(() => {

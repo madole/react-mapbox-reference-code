@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useMapboxMap } from "./Mapbox";
 import dronePositions from "../StaticData/positions-clipped.json";
-import { useRecoilValue } from "recoil";
-import { droneDisplayState } from "../State/videoState";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { droneDisplayState, showVideoMarkerState } from "../State/videoState";
 
 const DroneVisualisation: React.VFC = () => {
   const map = useMapboxMap();
+  const setVideoMarkerState = useSetRecoilState(showVideoMarkerState);
   useEffect(() => {
     map.loadImage("/drone.png", (error, image) => {
       if (error || !image) throw error;
@@ -47,6 +48,9 @@ const DroneVisualisation: React.VFC = () => {
         "icon-pitch-alignment": "map",
         "icon-rotation-alignment": "map",
       },
+    });
+    map.on("click", "drone", () => {
+      setVideoMarkerState(true);
     });
     return () => {
       map.removeLayer("drone");

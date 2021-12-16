@@ -11,17 +11,18 @@ import VideoControls from "./VideoControls";
 import LayerControls from "./LayerControls";
 import MapStyleControls from "./MapStyleControls";
 import React from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
   handDrawnExtrudedIsochroneState,
   handDrawnIsochroneState,
 } from "../State/layerState";
 
 export function AccordionMenu() {
-  const setHandDrawnIsochroneMode = useSetRecoilState(handDrawnIsochroneState);
-  const setHandDrawnExtrudedIsochroneMode = useSetRecoilState(
-    handDrawnExtrudedIsochroneState
+  const [showHandDrawnIsochrone, setHandDrawnIsochroneMode] = useRecoilState(
+    handDrawnIsochroneState
   );
+  const [showHandDrawnExtrudedIsochrone, setHandDrawnExtrudedIsochroneMode] =
+    useRecoilState(handDrawnExtrudedIsochroneState);
   return (
     <>
       <Accordion>
@@ -63,17 +64,20 @@ export function AccordionMenu() {
       <Stack alignItems="center" sx={{ p: 2 }}>
         <Button
           variant="outlined"
-          onClick={() => setHandDrawnExtrudedIsochroneMode(true)}
+          onClick={() =>
+            setHandDrawnExtrudedIsochroneMode(!showHandDrawnExtrudedIsochrone)
+          }
         >
-          Hand drawn extruded isochrone
+          {showHandDrawnExtrudedIsochrone ? "Stop" : "Start"} Hand drawn
+          extruded isochrone
         </Button>
       </Stack>
       <Stack alignItems="center" sx={{ p: 2 }}>
         <Button
           variant="outlined"
-          onClick={() => setHandDrawnIsochroneMode(true)}
+          onClick={() => setHandDrawnIsochroneMode(!showHandDrawnIsochrone)}
         >
-          Hand draw isochrone
+          {showHandDrawnIsochrone ? "Stop" : "Start"} Hand draw isochrone
         </Button>
       </Stack>
     </>
