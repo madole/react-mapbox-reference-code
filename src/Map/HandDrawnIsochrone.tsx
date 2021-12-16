@@ -5,6 +5,8 @@ import { drawControl } from "./drawControlSetup";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import { maskFeatureCollectionPolygons } from "../Utils/maskFeatureCollectionPolygons";
 import { handDrawnIsochroneState } from "../State/layerState";
+import turfArea from "@turf/area";
+import { Alert } from "@mui/material";
 
 const PREFIX = "handdrawn-isochrone";
 
@@ -13,6 +15,7 @@ const HandDrawnIsochroneComponent: React.VFC = () => {
   const [geojson, setGeojson] = useState<GeoJSON.Feature<GeoJSON.Polygon>[]>(
     []
   );
+  const [burnArea, setBurnArea] = useState<number | null>(null);
 
   useEffect(() => {
     if (map.hasControl(drawControl)) {
@@ -29,8 +32,15 @@ const HandDrawnIsochroneComponent: React.VFC = () => {
         newFeature.properties.id = existingGeojson.length + 1;
         return [...existingGeojson, newFeature];
       });
+
+      const data = drawControl.getAll();
+      if (!data) return;
+      const burnArea = turfArea(data);
+      // Restrict the area to 2 decimal points.
+      setBurnArea(burnArea / 10000);
+
       setTimeout(() => {
-        const id = drawControl.getAll()?.features[0]?.id;
+        const id = data?.features[0]?.id;
         if (id) {
           drawControl.delete(id.toString());
         }
@@ -93,6 +103,26 @@ const HandDrawnIsochroneComponent: React.VFC = () => {
       });
     });
   }, [geojson, map]);
+
+  if (burnArea) {
+    return (
+      <Alert
+        variant="filled"
+        severity="info"
+        sx={{
+          position: "absolute",
+          bottom: "2rem",
+          right: "2rem",
+          zIndex: 100,
+        }}
+        onClose={() => {
+          setBurnArea(null);
+        }}
+      >
+        <strong>{burnArea.toFixed(2)}</strong> hectares.
+      </Alert>
+    );
+  }
 
   return null;
 };
