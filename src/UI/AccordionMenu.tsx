@@ -12,10 +12,16 @@ import LayerControls from "./LayerControls";
 import MapStyleControls from "./MapStyleControls";
 import React from "react";
 import { useSetRecoilState } from "recoil";
-import { handDrawnIsochroneState } from "../State/layerState";
+import {
+  handDrawnExtrudedIsochroneState,
+  handDrawnIsochroneState,
+} from "../State/layerState";
 
 export function AccordionMenu() {
   const setHandDrawnIsochroneMode = useSetRecoilState(handDrawnIsochroneState);
+  const setHandDrawnExtrudedIsochroneMode = useSetRecoilState(
+    handDrawnExtrudedIsochroneState
+  );
   return (
     <>
       <Accordion>
@@ -54,6 +60,14 @@ export function AccordionMenu() {
           <MapStyleControls />
         </AccordionDetails>
       </Accordion>
+      <Stack alignItems="center" sx={{ p: 2 }}>
+        <Button
+          variant="outlined"
+          onClick={() => setHandDrawnExtrudedIsochroneMode(true)}
+        >
+          Hand drawn extruded isochrone
+        </Button>
+      </Stack>
       <Stack alignItems="center" sx={{ p: 2 }}>
         <Button
           variant="outlined"

@@ -4,11 +4,11 @@ import { useRecoilValue } from "recoil";
 import { drawControl } from "./drawControlSetup";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import { maskFeatureCollectionPolygons } from "../Utils/maskFeatureCollectionPolygons";
-import { handDrawnIsochroneState } from "../State/layerState";
+import { handDrawnExtrudedIsochroneState } from "../State/layerState";
 
-const PREFIX = "handdrawn-isochrone";
+const PREFIX = "handdrawn-extruded-isochrone";
 
-const HandDrawnIsochroneComponent: React.VFC = () => {
+const HandDrawnExtrudedIsochroneLayer: React.VFC = () => {
   const map = useMapboxMap();
   const [geojson, setGeojson] = useState<GeoJSON.Feature<GeoJSON.Polygon>[]>(
     []
@@ -48,7 +48,7 @@ const HandDrawnIsochroneComponent: React.VFC = () => {
 
       map.addLayer({
         id: `${PREFIX}-${i}`,
-        type: "fill",
+        type: "fill-extrusion",
         source: {
           type: "geojson",
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -57,7 +57,7 @@ const HandDrawnIsochroneComponent: React.VFC = () => {
         },
 
         paint: {
-          "fill-color": [
+          "fill-extrusion-color": [
             // interpolate colour from id property value
             "interpolate",
             ["linear"],
@@ -81,7 +81,9 @@ const HandDrawnIsochroneComponent: React.VFC = () => {
             8,
             "#5a0998",
           ],
-          "fill-opacity": 0.65,
+          "fill-extrusion-opacity": 0.85,
+          // "fill-extrusion-height": ["get", "height"],
+          "fill-extrusion-height": ["/", 500, ["get", "id"]],
         },
       });
     });
@@ -90,9 +92,11 @@ const HandDrawnIsochroneComponent: React.VFC = () => {
   return null;
 };
 
-const HandDrawnIsochrone = () => {
-  const showHandDrawnIsochrone = useRecoilValue(handDrawnIsochroneState);
+const HandDrawnExtrudedIsochrone = () => {
+  const showHandDrawnIsochrone = useRecoilValue(
+    handDrawnExtrudedIsochroneState
+  );
   if (!showHandDrawnIsochrone) return null;
-  return <HandDrawnIsochroneComponent />;
+  return <HandDrawnExtrudedIsochroneLayer />;
 };
-export default HandDrawnIsochrone;
+export default HandDrawnExtrudedIsochrone;

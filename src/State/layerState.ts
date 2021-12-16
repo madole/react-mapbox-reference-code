@@ -29,3 +29,8 @@ export const handDrawnIsochroneState = atom<boolean>({
   key: "showHandDrawnIsochrone",
   default: false,
 });
+
+export const handDrawnExtrudedIsochroneState = atom<boolean>({
+  key: "showHandDrawnExtrudedIsochrone",
+  default: false,
+});

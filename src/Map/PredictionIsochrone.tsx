@@ -16,7 +16,7 @@ const splitPredictions = maskFeatureCollectionPolygons(
 const PREFIX = "isochrone";
 let popups: mapboxgl.Popup[] = [];
 
-const PredictionIsochroneComponent: React.VFC = () => {
+const ExtrudedPredictionIsochroneComponent: React.VFC = () => {
   const map = useMapboxMap();
   const threeDPrediction = useRecoilValue(threeDIsochronePredictionState);
 
@@ -132,10 +132,10 @@ const PredictionIsochroneComponent: React.VFC = () => {
   return null;
 };
 
-const PredictionIsochrone = () => {
+const ExtrudedPredictionIsochrone = () => {
   const showPrediction = useRecoilValue(isochronePredictionState);
   if (!showPrediction) return null;
-  return <PredictionIsochroneComponent />;
+  return <ExtrudedPredictionIsochroneComponent />;
 };
 
-export default PredictionIsochrone;
+export default ExtrudedPredictionIsochrone;
