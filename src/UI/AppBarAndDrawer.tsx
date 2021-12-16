@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   AppBar as MuiAppBar,
+  Avatar,
   Box,
   Drawer,
   IconButton,
@@ -39,8 +40,13 @@ const AppBarAndDrawer: React.FC<AppBarProps> = (props) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" color="inherit" sx={{ flexGrow: 1 }}>
-            Video Imagery Viewer
+          <Avatar src="/logo.png" alt="logo" />
+          <Typography
+            variant="h6"
+            color="inherit"
+            sx={{ flexGrow: 1, paddingLeft: 2 }}
+          >
+            Firetrail Prototype Environment
           </Typography>
         </Toolbar>
       </MuiAppBar>

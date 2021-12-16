@@ -65,6 +65,7 @@ const VideoMarker: React.FC<VideoMarkerProps> = (props) => {
 
   return null;
 };
+// eslint-disable-next-line react/display-name
 export default () => {
   const showVideoMarker = useRecoilValue(showVideoMarkerState);
   if (!showVideoMarker) {
