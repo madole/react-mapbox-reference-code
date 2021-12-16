@@ -61,23 +61,25 @@ export function AccordionMenu() {
           <MapStyleControls />
         </AccordionDetails>
       </Accordion>
-      <Stack alignItems="center" sx={{ p: 2 }}>
-        <Button
-          variant="outlined"
-          onClick={() =>
-            setHandDrawnExtrudedIsochroneMode(!showHandDrawnExtrudedIsochrone)
-          }
-        >
-          {showHandDrawnExtrudedIsochrone ? "Stop" : "Start"} Hand drawn
-          extruded isochrone
-        </Button>
-      </Stack>
+      {/*<Stack alignItems="center" sx={{ p: 2 }}>*/}
+      {/*  <Button*/}
+      {/*    variant="outlined"*/}
+      {/*    onClick={() =>*/}
+      {/*      setHandDrawnExtrudedIsochroneMode(!showHandDrawnExtrudedIsochrone)*/}
+      {/*    }*/}
+      {/*  >*/}
+      {/*    {showHandDrawnExtrudedIsochrone ? "Stop" : "Start"} Hand drawn*/}
+      {/*    extruded isochrone*/}
+      {/*  </Button>*/}
+      {/*</Stack>*/}
       <Stack alignItems="center" sx={{ p: 2 }}>
         <Button
           variant="outlined"
           onClick={() => setHandDrawnIsochroneMode(!showHandDrawnIsochrone)}
         >
-          {showHandDrawnIsochrone ? "Stop" : "Start"} Hand draw isochrone
+          {showHandDrawnIsochrone
+            ? "Save Prediction"
+            : "Create Manual Prediction"}
         </Button>
       </Stack>
     </>
