@@ -55,8 +55,8 @@ function App() {
           <AirTraffic />
           <PredictionIsochrone />
           <VideoMarker />
+          <DrawFireBoundary />
         </Mapbox>
-        <DrawFireBoundary />
       </Box>
     </>
   );

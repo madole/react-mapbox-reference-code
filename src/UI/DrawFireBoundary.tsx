@@ -1,9 +1,11 @@
 import { Fab } from "@mui/material";
-import { Add } from "@mui/icons-material";
+import { Add, AirplanemodeActive } from "@mui/icons-material";
 import React from "react";
 import { drawControl } from "../Map/drawControlSetup";
+import { useMapboxMap } from "../Map/Mapbox";
 
 export function DrawFireBoundary() {
+  const map = useMapboxMap();
   return (
     <Fab
       variant="extended"
@@ -16,11 +18,14 @@ export function DrawFireBoundary() {
         right: "3rem",
       }}
       onClick={() => {
-        drawControl.changeMode("draw_polygon");
+        map.flyTo({
+          center: [150.30739, -33.71977],
+          pitch: 60,
+        });
       }}
     >
-      <Add sx={{ mr: 1 }} />
-      Draw fire boundary
+      <AirplanemodeActive sx={{ mr: 1 }} />
+      Fly to my LGA
     </Fab>
   );
 }
