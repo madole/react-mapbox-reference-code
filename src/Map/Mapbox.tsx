@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import mapboxgl from "mapbox-gl";
+import mapboxgl, { LngLat, LngLatLike } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 const MapboxMapContext = React.createContext<mapboxgl.Map | null>(null);
@@ -20,10 +20,13 @@ export interface MapboxProps {
   zoom?: number;
 }
 
+const defaultCenter:LngLatLike = [0,0]
+
 const Mapbox: React.FC<MapboxProps> = (props) => {
-  const { style } = props;
   const ref = useRef<HTMLDivElement>(null);
-  const { center = [0, 0], zoom = 17, apiKey, children } = props;
+  
+  const { center = defaultCenter, zoom = 17, apiKey, children, style } = props;
+
   const mapboxRef = useRef<mapboxgl.Map | null>(null);
   const [loaded, setLoaded] = useState(false);
 
